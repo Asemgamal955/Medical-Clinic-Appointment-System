@@ -4,7 +4,7 @@ require('dotenv').config();
 // Brevo (Sendinblue) API configuration
 const BREVO_API_KEY = process.env.BREVO_API_KEY;
 const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
-const SENDER_EMAIL = process.env.SENDER_EMAIL || 'noreply@clinic.com';
+const SENDER_EMAIL = process.env.SENDER_EMAIL;
 const SENDER_NAME = process.env.SENDER_NAME || 'Medical Clinic';
 
 /**
