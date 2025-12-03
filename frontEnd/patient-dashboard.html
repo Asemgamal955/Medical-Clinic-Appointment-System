@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard - AlexClinic</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
 </head>
 <body class="bg-light">
 
@@ -35,7 +34,7 @@
                         📂 Medical Records
                     </div>
                     <div class="card-body">
-                        <div class="list-group list-group-flush">
+                        <div class="list-group list-group-flush" id="medicalRecordsList">
                             <a href="#" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1">Blood Test Results</h6>
@@ -83,13 +82,6 @@
                                         <td><span class="badge bg-success">Confirmed</span></td>
                                         <td><button class="btn btn-sm btn-outline-danger">Cancel</button></td>
                                     </tr>
-                                    <tr>
-                                        <td>2025-12-10</td>
-                                        <td>02:30 PM</td>
-                                        <td>Dr. Mona (Cardio)</td>
-                                        <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                        <td><button class="btn btn-sm btn-outline-danger">Cancel</button></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -108,18 +100,31 @@
                 </div>
                 <div class="modal-body">
                     <form id="bookingForm">
-                        <div class="mb-3">
-                            <label class="form-label">Select Date</label>
-                            <input type="date" class="form-control" required>
-                        </div>
+                        
                         <div class="mb-3">
                             <label class="form-label">Select Doctor</label>
-                            <select class="form-select" required>
+                            <select class="form-select" id="doctorId" required>
                                 <option value="">Choose...</option>
-                                <option>Dr. Mohamed</option>
-                                <option>Dr. Sarah</option>
+                                <option value="1">Dr. Mohamed (Cardiology)</option>
+                                <option value="2">Dr. Sarah (Dermatology)</option>
                             </select>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Select Date</label>
+                            <input type="date" class="form-control" id="appointmentDate" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Select Time</label>
+                            <input type="time" class="form-control" id="appointmentTime" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Notes (Optional)</label>
+                            <textarea class="form-control" id="notes" rows="2"></textarea>
+                        </div>
+
                         <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
                     </form>
                 </div>
@@ -127,33 +132,46 @@
         </div>
     </div>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // 1. Check if user is logged in (Simple session check)
-        const token = localStorage.getItem('userToken');
-        if (!token) {
-            // If no token, kick them back to login
-            // alert("You must login first!");
-            // window.location.href = 'login.html';
-            
-            // NOTE: Commented out above lines for now so you can test easily
-        }
-
-        // 2. Logout Logic
+        // 1. Logout Logic
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('userToken');
-            window.location.href = 'index.html';
+            window.location.href = 'index.html'; // Goes back to landing page
         });
 
-        // 3. Handle Booking (Fake interaction)
+        // 2. Handle Booking (Matched to appointmentController.js)
         document.getElementById('bookingForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert("Booking request sent to backend!");
+            
+            // PREPARE DATA FOR TEAMMATE
+            const formData = {
+                doctorId: document.getElementById('doctorId').value,
+                appointmentDate: document.getElementById('appointmentDate').value,
+                appointmentTime: document.getElementById('appointmentTime').value,
+                notes: document.getElementById('notes').value
+            };
+
+            console.log("Ready to send to POST /api/appointments:", formData);
+            
+            // ============================================================
+            // TODO: TEAMMATE - PASTE API CALL HERE
+            // Endpoint: POST /api/appointments
+            // Headers: Authorization: Bearer <token>
+            // Body: JSON.stringify(formData)
+            // ============================================================
+
+            alert("Booking Data Prepared! Check Console.");
+            
             // Close modal manually
             const modal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
             modal.hide();
         });
+
+        // 3. TODO for Teammate:
+        // You need to fetch data from GET /api/appointments and populate #appointmentTableBody
+        // You need to fetch data from GET /api/patient/medical-records and populate #medicalRecordsList
     </script>
 </body>
 </html>
