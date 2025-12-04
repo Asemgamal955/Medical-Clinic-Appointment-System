@@ -1,0 +1,14 @@
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
+:root {
+    --primary-color: #052049; /* Bootstrap Primary */
+    --bg-light: #f8f9fa;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
