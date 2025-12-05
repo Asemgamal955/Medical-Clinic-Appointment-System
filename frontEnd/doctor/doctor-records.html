@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Medical Record - AlexClinic</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body class="bg-light">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="doctor-dashboard.html">👨‍⚕️ Doctor Portal</a>
+            <a class="navbar-brand" href="doctor-dashboard.html">Doctor Portal</a>
             <a href="doctor-dashboard.html" class="btn btn-outline-light btn-sm">Back to Dashboard</a>
         </div>
     </nav>
@@ -55,35 +55,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Set today's date by default
-        document.getElementById('recordDate').valueAsDate = new Date();
-
-        // SUBMIT LOGIC
-        document.getElementById('recordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // PREPARE DATA FOR TEAMMATE
-            const formData = {
-                patientId: document.getElementById('patientId').value,
-                diagnosis: document.getElementById('diagnosis').value,
-                prescription: document.getElementById('prescription').value,
-                recordDate: document.getElementById('recordDate').value
-            };
-
-            console.log("Ready to send to Backend:", formData);
-
-            // ============================================================
-            // TODO: TEAMMATE - PASTE API CALL HERE
-            // Endpoint: POST /api/doctor/medical-records
-            // Body: JSON.stringify(formData)
-            // Headers: Authorization: Bearer <token>
-            // ============================================================
-
-            alert("Medical Record Prepared! Check Console.");
-            // Optional: Redirect back to dashboard
-            // window.location.href = 'doctor-dashboard.html';
-        });
-    </script>
+    <script src="../assets/js/doctorRecord.js"></script>
 </body>
 </html>

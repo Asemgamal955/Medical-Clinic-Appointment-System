@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard - AlexClinic</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body class="bg-light">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
             <a class="navbar-brand" href="#">My Dashboard</a>
-            <button class="btn btn-outline-light btn-sm" id="logoutBtn">Logout</button>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-light btn-sm" id="profileBtn">Profile</button>
+                <button class="btn btn-outline-light btn-sm" id="logoutBtn">Logout</button>
+            </div>
         </div>
     </nav>
 
@@ -134,45 +137,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // 1. Logout Logic
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            localStorage.removeItem('userToken');
-            window.location.href = 'index.html'; // Goes back to landing page
-        });
-
-        // 2. Handle Booking (Matched to appointmentController.js)
-        document.getElementById('bookingForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // PREPARE DATA FOR TEAMMATE
-            const formData = {
-                doctorId: document.getElementById('doctorId').value,
-                appointmentDate: document.getElementById('appointmentDate').value,
-                appointmentTime: document.getElementById('appointmentTime').value,
-                notes: document.getElementById('notes').value
-            };
-
-            console.log("Ready to send to POST /api/appointments:", formData);
-            
-            // ============================================================
-            // TODO: TEAMMATE - PASTE API CALL HERE
-            // Endpoint: POST /api/appointments
-            // Headers: Authorization: Bearer <token>
-            // Body: JSON.stringify(formData)
-            // ============================================================
-
-            alert("Booking Data Prepared! Check Console.");
-            
-            // Close modal manually
-            const modal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
-            modal.hide();
-        });
-
-        // 3. TODO for Teammate:
-        // You need to fetch data from GET /api/appointments and populate #appointmentTableBody
-        // You need to fetch data from GET /api/patient/medical-records and populate #medicalRecordsList
-    </script>
+    <script src="../assets/js/patientDashboard.js"></script>
 </body>
 </html>
